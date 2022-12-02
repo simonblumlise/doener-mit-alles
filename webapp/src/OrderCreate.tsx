@@ -1,10 +1,10 @@
-import {ReactElement, useState} from "react";
-import {Button, TextField} from "@mui/material";
-import {newDefaultOrder, NewOrder} from "./data/order.types";
-import {useCreateOrder} from "./data/useCreateOrder";
+import { ReactElement, useState } from "react";
+import { Button, TextField } from "@mui/material";
+import { NewDefaultOrder, NewOrder } from "./data/order.types";
+import { useCreateOrder } from "./data/useCreateOrder";
 
 const OrderCreate = (): ReactElement => {
-    const [newOrder, setNewOrder] = useState<NewOrder>(newDefaultOrder);
+    const [newOrder, setNewOrder] = useState<NewOrder>(NewDefaultOrder);
     const createOrder = useCreateOrder();
 
     const submit = (e: any) => {
@@ -16,38 +16,44 @@ const OrderCreate = (): ReactElement => {
     return <form onSubmit={submit}>
         <div>
             <TextField
+                size="small"
                 label="Bestellende Person"
-                variant="outlined"
+                variant="standard"
                 value={newOrder.owner}
                 onChange={(e) => setNewOrder((prevState) => ({...prevState, owner: e.target.value}))}
             />
         </div>
         <div>
             <TextField
+                size="small"
                 label="Paypal Link"
-                variant="outlined"
+                variant="standard"
                 value={newOrder.paypalLink}
                 onChange={(e) => setNewOrder((prevState) => ({...prevState, paypalLink: e.target.value}))}
             />
         </div>
         <div>
             <TextField
+                size="small"
                 label="Restaurant"
-                variant="outlined"
+                variant="standard"
                 value={newOrder.restaurantName}
                 onChange={(e) => setNewOrder((prevState) => ({...prevState, restaurantName: e.target.value}))}
             />
         </div>
         <div>
             <TextField
+                size="small"
                 label="Link zur Speisekarte"
-                variant="outlined"
+                variant="standard"
                 value={newOrder.restaurantLink}
                 onChange={(e) => setNewOrder((prevState) => ({...prevState, restaurantLink: e.target.value}))}
             />
         </div>
         <div>
             <TextField
+                size="small"
+                variant="standard"
                 id="time"
                 label="Bestellzeitpunkt"
                 type="time"

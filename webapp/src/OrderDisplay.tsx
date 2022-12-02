@@ -1,16 +1,20 @@
-import {ReactElement} from "react";
-import OrderCreate from "./OrderCreate";
-import {useGetOrder} from "./data/useGetOrder";
-import MealCreate from "./MealCreate";
+import { ReactElement } from "react";
+import { Order } from "./data/order.types";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-const OrderDisplay = (): ReactElement => {
-    const {data: order, isError, error} = useGetOrder();
-    return <div className="App">
-        {isError ? <OrderCreate/> : <>
-            {JSON.stringify(order)}
-            <MealCreate/>
-        </>}
-    </div>;
+interface OrderDisplayProps {
+    order: Order;
+}
+
+const OrderDisplay = ({ order }: OrderDisplayProps): ReactElement => {
+    return (
+        <>
+            <h3>{`${order.owner} bestellt bei `}
+                <a href={order.restaurantLink} target="_blank">{order.restaurantName}</a>
+            </h3>
+            <a href={order.paypalLink}>Bezahlen: <AttachMoneyIcon /></a>
+        </>
+    );
 };
 
 export default OrderDisplay;

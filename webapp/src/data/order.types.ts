@@ -1,22 +1,31 @@
 export type Order = {
-  paypalLink: string;
-  owner: string;
-  restaurantName: string;
-  restaurantLink: string;
-  orderTime: Date;
-  isOpen: boolean;
-  meals: Meal[];
+    paypalLink: string;
+    owner: string;
+    restaurantName: string;
+    restaurantLink: string;
+    orderTime: Date;
+    isOpen: boolean;
+    meals: Meal[];
 };
 
 export type Meal = {
-  owner: string;
-  mealName: string;
-  price: string;
-  isPaid: boolean;
-  note?: string;
+    id: number;
+    owner: string;
+    mealName: string;
+    price: string;
+    isPaid: boolean;
+    note?: string;
 };
 
-export const DefaultMeal = {
+export type NewMeal = {
+    owner: string;
+    mealName: string;
+    price: string;
+    isPaid: boolean;
+    note?: string;
+};
+
+export const DefaultMeal: NewMeal = {
     owner: '',
     mealName: '',
     price: '',
@@ -31,7 +40,7 @@ export type NewOrder = {
     orderTime: string;
 }
 
-export const newDefaultOrder: NewOrder = {
+export const NewDefaultOrder: NewOrder = {
     paypalLink: '',
     owner: '',
     restaurantName: '',
