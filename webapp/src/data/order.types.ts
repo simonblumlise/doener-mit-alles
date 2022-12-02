@@ -16,17 +16,17 @@ export type Meal = {
   note?: string;
 };
 export type NewOrder = {
-  paypalLink: string;
-  owner: string;
-  restaurantName: string;
-  restaurantLink: string;
-  orderTime: Date;
-};
+    paypalLink: string;
+    owner: string;
+    restaurantName: string;
+    restaurantLink: string;
+    orderTime: string;
+}
 
 export const newDefaultOrder: NewOrder = {
-  paypalLink: "",
-  owner: "",
-  restaurantName: "",
-  restaurantLink: "",
-  orderTime: new Date(Date.now()),
-};
+    paypalLink: '',
+    owner: '',
+    restaurantName: '',
+    restaurantLink: '',
+    orderTime: '',
+}

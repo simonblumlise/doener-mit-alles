@@ -1,11 +1,11 @@
 import {ReactElement, useState} from "react";
 import {Button, TextField} from "@mui/material";
-import {newDefaultOrder, NewOrder} from "./order.types";
+import {newDefaultOrder, NewOrder} from "./data/order.types";
 
 const OrderCreate = (): ReactElement => {
     const [newOrder, setNewOrder] = useState<NewOrder>(newDefaultOrder);
 
-    return <form>
+    return <form onSubmit={() => console.log(newOrder)}>
         <div>
             <TextField
                 label="Bestellende Person"
@@ -39,9 +39,23 @@ const OrderCreate = (): ReactElement => {
             />
         </div>
         <div>
-            <TextField label="Bestellzeitpunkt" variant="outlined" />
+            <TextField
+                id="time"
+                label="Bestellzeitpunkt"
+                type="time"
+                defaultValue="07:30"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                inputProps={{
+                    step: 300, // 5 min
+                }}
+                sx={{ width: 150 }}
+                value={newOrder.orderTime}
+                onChange={(e) => setNewOrder((prevState) => ({...prevState, orderTime: e.target.value}))}
+            />
         </div>
-        <Button variant="outlined">Bestellung öffnen</Button>
+        <Button type="submit" variant="outlined">Bestellung öffnen</Button>
     </form>
 }
 
