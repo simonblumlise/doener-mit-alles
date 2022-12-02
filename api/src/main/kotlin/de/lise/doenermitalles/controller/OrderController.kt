@@ -1,5 +1,6 @@
 package de.lise.doenermitalles.controller
 
+import de.lise.doenermitalles.model.Meal
 import de.lise.doenermitalles.model.Order
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,9 +18,12 @@ class OrderController {
         else ResponseEntity.ok(order)
 
     @PostMapping
-    fun post(@RequestBody order: Order): ResponseEntity<Order> {
+    fun post(@RequestBody order: Order): ResponseEntity<Void> {
         this.order = order
-        return ResponseEntity.ok(this.order)
+        return ResponseEntity.ok().build()
     }
 
+    @PostMapping("/meal")
+    fun post(@RequestBody meal: Meal): ResponseEntity<Void> =
+        this.order?.meals?.add(meal)?.let { ResponseEntity.ok().build() } ?: ResponseEntity.notFound().build()
 }

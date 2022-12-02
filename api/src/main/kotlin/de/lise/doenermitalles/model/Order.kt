@@ -1,13 +1,13 @@
 package de.lise.doenermitalles.model
 
-import java.time.LocalDateTime
+import java.time.LocalTime
 
 data class Order(
     val paypalLink: String,
     val owner: String,
     val restaurantName: String,
     val restaurantLink: String,
-    val orderTime: LocalDateTime,
+    val orderTime: LocalTime,
     val isOpen: Boolean = true,
-    val maels: MutableList<Meal> = mutableListOf(),
+    val meals: MutableList<Meal> = mutableListOf(),
 )

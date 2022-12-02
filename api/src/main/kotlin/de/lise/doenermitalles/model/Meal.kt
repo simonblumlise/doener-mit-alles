@@ -4,6 +4,6 @@ data class Meal(
     val owner: String,
     val mealName: String,
     val price: Float,
-    val isPaid: Boolean,
-    val note: String,
+    var isPaid: Boolean = false,
+    val note: String? = null,
 ) 
