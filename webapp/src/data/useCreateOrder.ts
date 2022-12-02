@@ -1,21 +1,19 @@
 import { useMutation, useQueryClient } from "react-query";
+import {NewOrder} from "./order.types";
 
-type Order = {
-  paypalLink: string;
-  owner: string;
-  restaurantName: string;
-  restaurantLink: string;
-  orderTime: string;
-};
 
-export function createOrder() {
+export function useCreateOrder() {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async (order: Order) => {
-      await fetch("localhost:8080/order", {
+    async (order: NewOrder) => {
+      await fetch("http://localhost:8080/order", {
         method: "POST",
         body: JSON.stringify(order),
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        }
       });
     },
     {

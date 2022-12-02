@@ -1,11 +1,19 @@
 import {ReactElement, useState} from "react";
 import {Button, TextField} from "@mui/material";
 import {newDefaultOrder, NewOrder} from "./data/order.types";
+import {useCreateOrder} from "./data/useCreateOrder";
 
 const OrderCreate = (): ReactElement => {
     const [newOrder, setNewOrder] = useState<NewOrder>(newDefaultOrder);
+    const createOrder = useCreateOrder();
 
-    return <form onSubmit={() => console.log(newOrder)}>
+    const submit = (e: any) => {
+        e.preventDefault();
+        console.log(newOrder);
+        createOrder.mutate(newOrder);
+    }
+
+    return <form onSubmit={submit}>
         <div>
             <TextField
                 label="Bestellende Person"

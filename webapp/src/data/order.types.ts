@@ -15,6 +15,14 @@ export type Meal = {
   isPaid: boolean;
   note?: string;
 };
+
+export const DefaultMeal = {
+    owner: '',
+    mealName: '',
+    price: '',
+    isPaid: false,
+    note: '',
+};
 export type NewOrder = {
     paypalLink: string;
     owner: string;
