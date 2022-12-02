@@ -5,7 +5,7 @@ type Order = {
   owner: string;
   restaurantName: string;
   restaurantLink: string;
-  orderTime: Date;
+  orderTime: string;
 };
 
 export function createOrder() {
