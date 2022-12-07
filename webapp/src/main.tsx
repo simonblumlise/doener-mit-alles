@@ -10,15 +10,17 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        children: [
+            {
+                path: "newOrder",
+                element: <OrderCreate/>
+            },
+            {
+                path: "order/:id",
+                element: <OrderOverview/>
+            }
+        ]
     },
-    {
-        path: "newOrder",
-        element: <OrderCreate/>
-    },
-    {
-        path: "order/:id",
-        element: <OrderOverview/>
-    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

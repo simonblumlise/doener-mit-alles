@@ -3,6 +3,7 @@ import MealCreate from "./MealCreate";
 import OrderDisplay from "./OrderDisplay";
 import MealDisplay from "./MealDisplay";
 import { ReactElement } from "react";
+import NewOrderButton from "./NewOrderButton";
 
 const OrderOverview = (): ReactElement => {
     const { data: order, isLoading, isError, error } = useGetOrder();
@@ -16,6 +17,7 @@ const OrderOverview = (): ReactElement => {
     }
 
     return <div className="App">
+        <NewOrderButton />
         <OrderDisplay order={order} />
             {order?.meals.length > 0 && <MealDisplay meals={order.meals} />}
         <MealCreate />
