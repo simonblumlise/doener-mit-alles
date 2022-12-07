@@ -13,7 +13,10 @@ const OrderOverview = (): ReactElement => {
     }
 
     if(isError || !order) {
-        return <div>Error {error?.message}</div>
+        return <div>
+            <NewOrderButton />
+            Error {error?.message}
+        </div>
     }
 
     return <div className="App">
