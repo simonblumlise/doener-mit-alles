@@ -20,7 +20,7 @@ const OrderCreate = (): ReactElement => {
                 label="Bestellende Person"
                 variant="standard"
                 value={newOrder.owner}
-                onChange={(e) => setNewOrder((prevState) => ({...prevState, owner: e.target.value}))}
+                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, owner: e.target.value }))}
             />
         </div>
         <div>
@@ -29,7 +29,7 @@ const OrderCreate = (): ReactElement => {
                 label="Paypal Link"
                 variant="standard"
                 value={newOrder.paypalLink}
-                onChange={(e) => setNewOrder((prevState) => ({...prevState, paypalLink: e.target.value}))}
+                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, paypalLink: e.target.value }))}
             />
         </div>
         <div>
@@ -38,7 +38,7 @@ const OrderCreate = (): ReactElement => {
                 label="Restaurant"
                 variant="standard"
                 value={newOrder.restaurantName}
-                onChange={(e) => setNewOrder((prevState) => ({...prevState, restaurantName: e.target.value}))}
+                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, restaurantName: e.target.value }))}
             />
         </div>
         <div>
@@ -47,7 +47,7 @@ const OrderCreate = (): ReactElement => {
                 label="Link zur Speisekarte"
                 variant="standard"
                 value={newOrder.restaurantLink}
-                onChange={(e) => setNewOrder((prevState) => ({...prevState, restaurantLink: e.target.value}))}
+                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, restaurantLink: e.target.value }))}
             />
         </div>
         <div>
@@ -66,7 +66,7 @@ const OrderCreate = (): ReactElement => {
                 }}
                 sx={{ width: 150 }}
                 value={newOrder.orderTime}
-                onChange={(e) => setNewOrder((prevState) => ({...prevState, orderTime: e.target.value}))}
+                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, orderTime: e.target.value }))}
             />
         </div>
         <Button type="submit" variant="outlined">Bestellung öffnen</Button>

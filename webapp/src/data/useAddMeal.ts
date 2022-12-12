@@ -1,22 +1,28 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, UseMutationResult, useQueryClient } from "react-query";
 import { NewMeal } from "./order.types";
 
-export function useAddMeal() {
-  const queryClient = useQueryClient();
+interface NewMealVars {
+    orderId: string,
+    meal: NewMeal,
+}
 
-  return useMutation(
-      async (meal: NewMeal) => {
-        await fetch("http://localhost:8080/order/meal", {
-          method: "POST",
-          body: JSON.stringify(meal),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(["order"]);
+export function useAddMeal(): UseMutationResult<void, unknown, NewMealVars> {
+    const queryClient = useQueryClient();
+
+    return useMutation(
+        async (vars) => {
+
+            await fetch(`${import.meta.env.VITE_BACKEND}/order/${vars.orderId}/meal`, {
+                method: "POST",
+                body: JSON.stringify(vars.meal),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        },
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries(["order"]);
         },
       }
   );

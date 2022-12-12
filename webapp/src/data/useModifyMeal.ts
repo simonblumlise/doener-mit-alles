@@ -1,8 +1,19 @@
 import { useMutation, UseMutationResult, useQueryClient } from "react-query";
 
+interface DeleteMealVars {
+    orderId: string,
+    mealId: string
+}
+
+interface UpdateMealIsPaid {
+    orderId: string,
+    mealId: string,
+    isPaid: boolean
+}
+
 interface UseModifyMealReturn {
-    deleteMeal: UseMutationResult<void, unknown, number>
-    updateIsPaid: UseMutationResult<void, unknown, { id: number, isPaid: boolean }>
+    deleteMeal: UseMutationResult<void, unknown, DeleteMealVars>
+    updateIsPaid: UseMutationResult<void, unknown, UpdateMealIsPaid>
 }
 
 export function useModifyMeal(): UseModifyMealReturn {
@@ -10,8 +21,9 @@ export function useModifyMeal(): UseModifyMealReturn {
 
     return {
         deleteMeal: useMutation(
-            async (id: number) => {
-                await fetch(`http://localhost:8080/order/meal/${id}`, {
+            async (vars) => {
+                console.log(vars.mealId)
+                await fetch(`${import.meta.env.VITE_BACKEND}/order/${vars.orderId}/meal/${vars.mealId}`, {
                     method: "DELETE",
                 });
             },
@@ -22,8 +34,8 @@ export function useModifyMeal(): UseModifyMealReturn {
             }
         ),
         updateIsPaid: useMutation(
-            async (vars: { id: number, isPaid: boolean }) => {
-                await fetch(`http://localhost:8080/order/meal/${vars.id}/isPaid`, {
+            async (vars) => {
+                await fetch(`${import.meta.env.VITE_BACKEND}/order/${vars.orderId}/meal/${vars.mealId}/isPaid`, {
                     method: "PUT",
                     body: new URLSearchParams({
                         'isPaid': String(vars.isPaid)

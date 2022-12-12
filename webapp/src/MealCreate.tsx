@@ -2,14 +2,20 @@ import { FormEvent, ReactElement, useState } from "react";
 import { DefaultMeal, NewMeal } from "./data/order.types";
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useAddMeal } from "./data/useAddMeal";
+import { useParams } from "react-router-dom";
 
 const MealCreate = (): ReactElement => {
     const [newMeal, setNewMeal] = useState<NewMeal>(DefaultMeal);
     const createMeal = useAddMeal();
+    const { id } = useParams<{ id: string }>();
+
+    if (!id) {
+        return <></>;
+    }
 
     const submit = (e: FormEvent) => {
         e.preventDefault();
-        createMeal.mutate(newMeal);
+        createMeal.mutate({ meal: newMeal, orderId: id });
     }
 
     return <form onSubmit={submit}>

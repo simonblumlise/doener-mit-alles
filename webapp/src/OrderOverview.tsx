@@ -22,7 +22,7 @@ const OrderOverview = (): ReactElement => {
     return <div className="App">
         <NewOrderButton />
         <OrderDisplay order={order} />
-            {order?.meals.length > 0 && <MealDisplay meals={order.meals} />}
+            {order?.meals.length > 0 && <MealDisplay meals={order.meals} orderId={order.id} />}
         <MealCreate />
     </div>;
 };

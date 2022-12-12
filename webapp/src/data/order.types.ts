@@ -1,4 +1,5 @@
 export type Order = {
+    id: string;
     paypalLink: string;
     owner: string;
     restaurantName: string;
@@ -9,7 +10,7 @@ export type Order = {
 };
 
 export type Meal = {
-    id: number;
+    id: string;
     owner: string;
     mealName: string;
     price: string;

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 async function fetchOrder(id: string | undefined) {
   if(id){
-    const response = await fetch(`http://localhost:8080/order/${id}`);
+    const response = await fetch(`${import.meta.env.VITE_BACKEND}/order/${id}`);
     const order: Order = await response.json();
     return order;
   }else return Promise.reject();

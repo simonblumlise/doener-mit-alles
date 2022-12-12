@@ -15,10 +15,11 @@ import { useModifyMeal } from "./data/useModifyMeal";
 
 
 interface MealDisplayProps {
+    orderId: string;
     meals: Meal[];
 }
 
-const MealDisplay = ({ meals }: MealDisplayProps): ReactElement => {
+const MealDisplay = ({ orderId, meals }: MealDisplayProps): ReactElement => {
 
     const { deleteMeal, updateIsPaid } = useModifyMeal();
 
@@ -42,8 +43,8 @@ const MealDisplay = ({ meals }: MealDisplayProps): ReactElement => {
                         <TableCell>{m.note}</TableCell>
                         <TableCell>{m.price}</TableCell>
                         <TableCell>{<Checkbox checked={m.isPaid}
-                                              onChange={() => updateIsPaid.mutate({ id: m.id, isPaid: !m.isPaid })} />}</TableCell>
-                        <TableCell><Button onClick={() => deleteMeal.mutate(m.id)}>Löschen</Button></TableCell>
+                                              onChange={() => updateIsPaid.mutate({ orderId, mealId: m.id, isPaid: !m.isPaid })} />}</TableCell>
+                        <TableCell><Button onClick={() => deleteMeal.mutate({ orderId, mealId: m.id })}>Löschen</Button></TableCell>
                     </TableRow>
                 ))}
             </TableBody>
