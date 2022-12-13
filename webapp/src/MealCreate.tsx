@@ -15,7 +15,7 @@ const MealCreate = (): ReactElement => {
 
     const submit = (e: FormEvent) => {
         e.preventDefault();
-        createMeal.mutate({ meal: newMeal, orderId: id });
+        createMeal.mutate({ meal: newMeal, orderId: id }, { onSuccess: () => setNewMeal(DefaultMeal)});
     }
 
     return <form onSubmit={submit}>
@@ -58,12 +58,14 @@ const MealCreate = (): ReactElement => {
             />
         </div>
         <div>
-            <FormControlLabel control={
-                <Checkbox value={newMeal.isPaid}
-                          onClick={() => setNewMeal((prevState) =>
-                              ({ ...prevState, isPaid: !prevState.isPaid })
-                          )}
-                />} label="bezahlt" />
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={newMeal.isPaid}
+                        onClick={() => setNewMeal((prevState) =>
+                          ({ ...prevState, isPaid: !prevState.isPaid }))}
+                    />} label="bezahlt"
+            />
         </div>
         <Button type="submit">Gericht hinzufügen</Button>
     </form>;

@@ -3,7 +3,6 @@ package de.lise.doenermitalles.controller
 import de.lise.doenermitalles.documents.OrderDocument
 import de.lise.doenermitalles.model.MealRequestBody
 import de.lise.doenermitalles.model.OrderRequestBody
-import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.http.MediaType
@@ -19,7 +18,7 @@ class OrderController {
     private lateinit var mongoTemplate: MongoTemplate
 
     @GetMapping("/{orderId}")
-    fun get(@PathVariable orderId: ObjectId): ResponseEntity<OrderDocument> =
+    fun get(@PathVariable orderId: String): ResponseEntity<OrderDocument> =
         mongoTemplate.findById(orderId, OrderDocument::class.java)?.let { ResponseEntity.ok(it) }
             ?: ResponseEntity.notFound().build()
 
@@ -27,10 +26,10 @@ class OrderController {
     fun post(@RequestBody order: OrderRequestBody): ResponseEntity<String> =
         order.mapToDocument()
             .let { mongoTemplate.save(it) }
-            .let { ResponseEntity.ok(it.id.toString()) }
+            .let { ResponseEntity.ok(it.id) }
 
     @PostMapping("/{orderId}/meal")
-    fun post(@PathVariable orderId: ObjectId, @RequestBody request: MealRequestBody): ResponseEntity<Void> =
+    fun post(@PathVariable orderId: String, @RequestBody request: MealRequestBody): ResponseEntity<Void> =
         mongoTemplate.findById(orderId, OrderDocument::class.java)
             ?.apply { meals.add(request.mapToDocument()) }
             ?.also { mongoTemplate.save(it) }
@@ -38,7 +37,7 @@ class OrderController {
             ?: ResponseEntity.notFound().build()
 
     @DeleteMapping("{orderId}/meal/{mealId}")
-    fun delete(@PathVariable orderId: ObjectId, @PathVariable mealId: ObjectId): ResponseEntity<Void> =
+    fun delete(@PathVariable orderId: String, @PathVariable mealId: String): ResponseEntity<Void> =
         mongoTemplate.findById(orderId, OrderDocument::class.java)
             ?.apply { this.meals.removeIf { it.id == mealId } }
             ?.also { mongoTemplate.save(it) }
@@ -47,14 +46,16 @@ class OrderController {
 
     @PutMapping("{orderId}/meal/{mealId}/isPaid", consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
     fun updateIsPaid(
-        @PathVariable orderId: ObjectId,
-        @PathVariable mealId: ObjectId,
+        @PathVariable orderId: String,
+        @PathVariable mealId: String,
         @RequestParam isPaid: Boolean
-    ): ResponseEntity<Void> = mongoTemplate.findById(orderId, OrderDocument::class.java)
-        ?.meals
-        ?.find { it.id == mealId }
-        ?.apply { this.isPaid = isPaid }
-        ?.also { mongoTemplate.save(it) }
-        ?.let { ResponseEntity.ok().build() }
-        ?: ResponseEntity.notFound().build()
+    ): ResponseEntity<Void> {
+        val orderDocument = mongoTemplate.findById(orderId, OrderDocument::class.java)
+        return orderDocument?.meals
+            ?.find { it.id == mealId }
+            ?.apply { this.isPaid = isPaid }
+            ?.also { mongoTemplate.save(orderDocument) }
+            ?.let { ResponseEntity.ok().build() }
+            ?: ResponseEntity.notFound().build()
+    }
 }

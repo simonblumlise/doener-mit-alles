@@ -8,7 +8,7 @@ import java.time.LocalTime
 @Document
 data class OrderDocument(
     @Id
-    val id: ObjectId = ObjectId.get(),
+    val id: String = ObjectId.get().toHexString(),
     val paypalLink: String,
     val owner: String,
     val restaurantName: String,
@@ -21,7 +21,7 @@ data class OrderDocument(
 @Document
 data class MealDocument(
     @Id
-    val id: ObjectId = ObjectId.get(),
+    val id: String = ObjectId.get().toHexString(),
     val owner: String,
     val mealName: String,
     val price: Float,
