@@ -1,10 +1,12 @@
+import {Dayjs} from "dayjs";
+
 export type Order = {
     id: string;
     paypalLink: string;
     owner: string;
     restaurantName: string;
     restaurantLink: string;
-    orderTime: Date;
+    orderTime: Dayjs;
     isOpen: boolean;
     meals: Meal[];
 };

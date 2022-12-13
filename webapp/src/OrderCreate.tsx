@@ -2,6 +2,7 @@ import { ReactElement, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { NewDefaultOrder, NewOrder } from "./data/order.types";
 import { useCreateOrder } from "./data/useCreateOrder";
+import {TimePicker} from "@mui/x-date-pickers";
 
 const OrderCreate = (): ReactElement => {
     const [newOrder, setNewOrder] = useState<NewOrder>(NewDefaultOrder);
@@ -9,7 +10,6 @@ const OrderCreate = (): ReactElement => {
 
     const submit = (e: any) => {
         e.preventDefault();
-        console.log(newOrder);
         createOrder.mutate(newOrder);
     }
 
@@ -51,6 +51,11 @@ const OrderCreate = (): ReactElement => {
             />
         </div>
         <div>
+            <TimePicker
+                value={newOrder.orderTime}
+                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, orderTime: e.target.value }))}
+                renderInput={(params) => <TextField {...params} />}
+            />
             <TextField
                 size="small"
                 variant="standard"
