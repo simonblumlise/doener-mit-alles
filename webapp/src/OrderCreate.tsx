@@ -2,7 +2,7 @@ import { ReactElement, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { NewDefaultOrder, NewOrder } from "./data/order.types";
 import { useCreateOrder } from "./data/useCreateOrder";
-import {TimePicker} from "@mui/x-date-pickers";
+import { DateTimePicker } from "@mui/x-date-pickers";
 
 const OrderCreate = (): ReactElement => {
     const [newOrder, setNewOrder] = useState<NewOrder>(NewDefaultOrder);
@@ -51,27 +51,14 @@ const OrderCreate = (): ReactElement => {
             />
         </div>
         <div>
-            <TimePicker
+            <DateTimePicker
                 value={newOrder.orderTime}
-                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, orderTime: e.target.value }))}
+                onChange={(e) => e && setNewOrder((prevState) => ({ ...prevState, orderTime: e }))}
                 renderInput={(params) => <TextField {...params} />}
-            />
-            <TextField
-                size="small"
-                variant="standard"
-                id="time"
-                label="Bestellzeitpunkt"
-                type="time"
-                defaultValue="07:30"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                inputProps={{
-                    step: 300, // 5 min
-                }}
-                sx={{ width: 150 }}
-                value={newOrder.orderTime}
-                onChange={(e) => setNewOrder((prevState) => ({ ...prevState, orderTime: e.target.value }))}
+                openTo="hours"
+                minutesStep={5}
+                inputFormat={"DD.MM.YYYY HH:mm"}
+                ampm={false}
             />
         </div>
         <Button type="submit" variant="outlined">Bestellung öffnen</Button>

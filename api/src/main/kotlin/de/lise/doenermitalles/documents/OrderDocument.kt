@@ -3,7 +3,7 @@ package de.lise.doenermitalles.documents
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
-import java.time.LocalTime
+import java.time.LocalDateTime
 
 @Document
 data class OrderDocument(
@@ -13,7 +13,7 @@ data class OrderDocument(
     val owner: String,
     val restaurantName: String,
     val restaurantLink: String,
-    val orderTime: LocalTime,
+    val orderTime: LocalDateTime,
     val isOpen: Boolean = true,
     val meals: MutableList<MealDocument> = mutableListOf(),
 )

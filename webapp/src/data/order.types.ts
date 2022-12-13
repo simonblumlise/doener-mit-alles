@@ -1,4 +1,4 @@
-import {Dayjs} from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 export type Order = {
     id: string;
@@ -40,7 +40,7 @@ export type NewOrder = {
     owner: string;
     restaurantName: string;
     restaurantLink: string;
-    orderTime: string;
+    orderTime: Dayjs;
 }
 
 export const NewDefaultOrder: NewOrder = {
@@ -48,5 +48,5 @@ export const NewDefaultOrder: NewOrder = {
     owner: '',
     restaurantName: '',
     restaurantLink: '',
-    orderTime: '',
+    orderTime: dayjs().hour(11).minute(0),
 }
