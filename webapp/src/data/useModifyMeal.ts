@@ -22,7 +22,6 @@ export function useModifyMeal(): UseModifyMealReturn {
     return {
         deleteMeal: useMutation(
             async (vars) => {
-                console.log(vars.mealId)
                 await fetch(`${import.meta.env.VITE_BACKEND}/order/${vars.orderId}/meal/${vars.mealId}`, {
                     method: "DELETE",
                 });

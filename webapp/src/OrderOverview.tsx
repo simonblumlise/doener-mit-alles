@@ -22,7 +22,8 @@ const OrderOverview = (): ReactElement => {
     return <div className="App">
         <NewOrderButton />
         <OrderDisplay order={order} />
-            {order?.meals.length > 0 && <MealDisplay meals={order.meals} orderId={order.id} />}
+        {order.meals.length > 0 && <MealDisplay meals={order.meals} orderId={order.id} />}
+        {order.meals.length > 0 && `Summe: ${order.meals.reduce((acc, curr) => acc + curr.price, 0).toFixed(2)}€`}
         <MealCreate />
     </div>;
 };

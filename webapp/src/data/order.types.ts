@@ -15,7 +15,7 @@ export type Meal = {
     id: string;
     owner: string;
     mealName: string;
-    price: string;
+    price: number;
     isPaid: boolean;
     note?: string;
 };
