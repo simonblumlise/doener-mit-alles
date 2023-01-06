@@ -19,55 +19,49 @@ const MealCreate = (): ReactElement => {
     }
 
     return <form onSubmit={submit}>
-        <div>
             <TextField
                 size="small"
                 label="Person"
                 variant="standard"
                 value={newMeal.owner}
+                margin="dense"
                 onChange={(e) => setNewMeal((prevState) => ({ ...prevState, owner: e.target.value }))}
             />
-        </div>
-        <div>
             <TextField
                 size="small"
                 label="Gericht"
                 variant="standard"
                 value={newMeal.mealName}
+                margin="dense"
                 onChange={(e) => setNewMeal((prevState) => ({ ...prevState, mealName: e.target.value }))}
             />
-        </div>
-        <div>
             <TextField
                 multiline
                 size="small"
                 label="Anmerkung"
                 variant="standard"
                 value={newMeal.note}
+                margin="dense"
                 onChange={(e) => setNewMeal((prevState) => ({ ...prevState, note: e.target.value }))}
             />
-        </div>
-        <div>
             <TextField
                 size="small"
                 type="number"
                 label="Preis"
                 variant="standard"
                 value={newMeal.price}
+                margin="dense"
                 onChange={(e) => setNewMeal((prevState) => ({ ...prevState, price: e.target.value }))}
             />
-        </div>
-        <div>
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={newMeal.isPaid}
-                        onClick={() => setNewMeal((prevState) =>
-                          ({ ...prevState, isPaid: !prevState.isPaid }))}
-                    />} label="bezahlt"
-            />
-        </div>
-        <Button type="submit">Gericht hinzufügen</Button>
+        <FormControlLabel
+            control={
+                <Checkbox
+                    checked={newMeal.isPaid}
+                    onClick={() => setNewMeal((prevState) =>
+                        ({ ...prevState, isPaid: !prevState.isPaid }))}
+                />} label="bezahlt"
+        />
+        <Button variant="outlined" type="submit" sx={{ mt: 1.5 }} color="error">Gericht hinzufügen</Button>
     </form>;
 };
 export default MealCreate;

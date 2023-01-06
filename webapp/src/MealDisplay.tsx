@@ -44,7 +44,8 @@ const MealDisplay = ({ orderId, meals }: MealDisplayProps): ReactElement => {
                         <TableCell>{m.price.toFixed(2)}€</TableCell>
                         <TableCell>{<Checkbox checked={m.isPaid}
                                               onChange={() => updateIsPaid.mutate({ orderId, mealId: m.id, isPaid: !m.isPaid })} />}</TableCell>
-                        <TableCell><Button onClick={() => deleteMeal.mutate({ orderId, mealId: m.id })}>Löschen</Button></TableCell>
+                        <TableCell><Button onClick={() => deleteMeal.mutate({ orderId, mealId: m.id })}
+                                           color="error">Löschen</Button></TableCell>
                     </TableRow>
                 ))}
             </TableBody>
