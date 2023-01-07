@@ -25,7 +25,7 @@ const OrderCreate = (): ReactElement => {
         />
             <TextField
                 size="small"
-                label="Paypal Link"
+                label="Paypal.me Link"
                 variant="standard"
                 value={newOrder.paypalLink}
                 margin="dense"

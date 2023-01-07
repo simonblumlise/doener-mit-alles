@@ -1,6 +1,6 @@
 import { FormEvent, ReactElement, useState } from "react";
 import { DefaultMeal, NewMeal } from "./data/order.types";
-import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useAddMeal } from "./data/useAddMeal";
 import { useParams } from "react-router-dom";
 
@@ -53,14 +53,6 @@ const MealCreate = (): ReactElement => {
                 margin="dense"
                 onChange={(e) => setNewMeal((prevState) => ({ ...prevState, price: e.target.value }))}
             />
-        <FormControlLabel
-            control={
-                <Checkbox
-                    checked={newMeal.isPaid}
-                    onClick={() => setNewMeal((prevState) =>
-                        ({ ...prevState, isPaid: !prevState.isPaid }))}
-                />} label="bezahlt"
-        />
         <Button variant="outlined" type="submit" sx={{ mt: 1.5 }} color="error">Gericht hinzufügen</Button>
     </form>;
 };

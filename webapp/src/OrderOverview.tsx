@@ -23,21 +23,16 @@ const OrderOverview = (): ReactElement => {
     return <div className="App">
         <NewOrderButton />
         <OrderDisplay order={order} />
-        <Grid container>
-            <Grid item xs={2} />
-            <Grid item xs={8}>
-                {order.meals.length > 0 && <MealDisplay meals={order.meals} orderId={order.id} />}
-            </Grid>
-            <Grid item xs={2} />
-        </Grid>
+                {order.meals.length > 0 &&
+                    <MealDisplay meals={order.meals} orderId={order.id} paypalLink={order.paypalLink} />}
         {order.meals.length > 0 && <Typography sx={{ fontWeight: 'bold' }}
                                                mt={2}>Summe: {order.meals.reduce((acc, curr) => acc + curr.price, 0).toFixed(2)}€</Typography>}
         <Grid container>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={4}>
+            <Grid item xs={1} />
+            <Grid item xs={10}>
                 <MealCreate />
             </Grid>
-            <Grid item xs={4}></Grid>
+            <Grid item xs={1} />
         </Grid>
     </div>;
 };
