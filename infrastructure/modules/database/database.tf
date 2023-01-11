@@ -9,9 +9,9 @@ resource "kubernetes_secret" "MONGO_CREDENTIALS" {
   }
 }
 
-resource "kubernetes_secret" "VIMEO_MONGO_DB" {
+resource "kubernetes_secret" "DOENER_MONGO_DB" {
   metadata {
-    name = "vimeo-mongo-db"
+    name = "doener-mongo-db"
     namespace = var.namespace
   }
   data = {
