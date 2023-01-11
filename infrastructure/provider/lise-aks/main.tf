@@ -12,10 +12,17 @@ terraform {
     }
   }
 }
-module "backend" {
-  source = "../../modules/backend"
-  image  = "liseinternal.azurecr.io/lise/doener/backend:prod"
-  mongodb_host = "localhost"
+#module "backend" {
+#  source = "../../modules/backend"
+#  image  = "liseinternal.azurecr.io/lise/doener/backend:prod"
+#  mongodb_host = "localhost"
+#  namespace = "l-doener-mit-alles-prod"
+#}
+
+module "database" {
+  source = "../../modules/database"
   namespace = "l-doener-mit-alles-prod"
+  mongo_password = ""
+  mongo_username = ""
 }
 
